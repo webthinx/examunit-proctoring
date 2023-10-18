@@ -720,6 +720,12 @@ paths:
           schema:
             type: integer
         -
+          name: student_session_id
+          in: query
+          required: true
+          schema:
+            type: integer
+        -
           name: timestamp
           in: query
           required: false
@@ -733,7 +739,7 @@ paths:
           schema:
             type: string
       requestBody:
-        description: 'Body can be used instead of query parameters'
+        description: 'Body can be used instead of timestamp & signature query parameters'
         required: false
         content:
           application/json:
