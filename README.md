@@ -1,1 +1,3 @@
-# examunit-proctoring
+# ExamUnit proctoring
+
+Documentation for OpenAPI connector
