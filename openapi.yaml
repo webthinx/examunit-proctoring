@@ -1,0 +1,1200 @@
+openapi: 3.0.0
+info:
+  title: 'ExamUnit: OpenAPI interface'
+  contact:
+    name: 'Webthinx s.r.o.'
+    url: 'https://webthinx.com'
+    email: vaclav.pelisek@webthinx.com
+  version: '0.1'
+servers:
+  -
+    url: proctoringapi.examunit.com/openapi/
+    description: 'Production environment'
+  -
+    url: rpbackend.appthinx.com/openapi/
+    description: 'Staging environment'
+paths:
+  /candidates:
+    post:
+      tags:
+        - Candidate
+      summary: 'Create new candidate'
+      operationId: 34cb7666e1d72f58ff1b6a9553a7a45b
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CandidateRequest'
+      responses:
+        '200':
+          description: 'Candidate is created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostCandidateResponse'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+  /student_sessions:
+    post:
+      tags:
+        - Student
+      summary: 'Use POST:Candidates'
+      operationId: 1ced16963f700e1004351722b0714051
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CandidateRequest'
+      responses:
+        '200':
+          description: 'Candidate is created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostCandidateResponse'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+      deprecated: true
+  '/candidates/{id}':
+    get:
+      tags:
+        - Candidate
+      summary: 'Fetch candidate'
+      operationId: 610f63ae229dac1b68c2778287e248d2
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        -
+          name: timestamp
+          in: query
+          required: false
+          schema:
+            type: number
+            format: float
+        -
+          name: signature
+          in: query
+          required: false
+          schema:
+            type: string
+      requestBody:
+        description: 'Body can be used instead of query parameters'
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimpleRequest'
+      responses:
+        '200':
+          description: 'Candidate is returned'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCandidateResponse'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '404':
+          description: 'Not found: resource not found'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+    put:
+      tags:
+        - Candidate
+      summary: 'Update existing candidate'
+      operationId: 74d5a20856e2554d3fbc7e7d9921d1cf
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CandidateRequest'
+      responses:
+        '200':
+          description: 'Candidate is updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutCandidateResponse'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '404':
+          description: 'Not found: resource not found'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+    delete:
+      tags:
+        - Candidate
+      summary: 'Delete candidate'
+      operationId: 13a2a7c14857ae659260fc8fc1a428c0
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        -
+          name: timestamp
+          in: query
+          required: false
+          schema:
+            type: number
+            format: float
+        -
+          name: signature
+          in: query
+          required: false
+          schema:
+            type: string
+      requestBody:
+        description: 'Body can be used instead of query parameters'
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimpleRequest'
+      responses:
+        '204':
+          description: 'Candidate is deleted'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '404':
+          description: 'Not found: resource not found'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+  '/student_sessions/{id}':
+    get:
+      tags:
+        - Student
+      summary: 'Use GET:Candidates'
+      operationId: d8e581cca9335a9eaa01d0c8010f17ae
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        -
+          name: timestamp
+          in: query
+          required: false
+          schema:
+            type: number
+            format: float
+        -
+          name: signature
+          in: query
+          required: false
+          schema:
+            type: string
+      requestBody:
+        description: 'Body can be used instead of query parameters'
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimpleRequest'
+      responses:
+        '200':
+          description: 'Candidate is returned'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCandidateResponse'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '404':
+          description: 'Not found: resource not found'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+      deprecated: true
+    put:
+      tags:
+        - Student
+      summary: 'Use PUT:Candidates'
+      operationId: 4ba8875fdd392818883ce342b8c82bab
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CandidateRequest'
+      responses:
+        '200':
+          description: 'Candidate is updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutCandidateResponse'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '404':
+          description: 'Not found: resource not found'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+      deprecated: true
+    delete:
+      tags:
+        - Student
+      summary: 'Use DELETE:Candidates'
+      operationId: f5e2719573d1fb9add4e8906abfcad0f
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        -
+          name: timestamp
+          in: query
+          required: false
+          schema:
+            type: number
+            format: float
+        -
+          name: signature
+          in: query
+          required: false
+          schema:
+            type: string
+      requestBody:
+        description: 'Body can be used instead of query parameters'
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimpleRequest'
+      responses:
+        '204':
+          description: 'Candidate is deleted'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '404':
+          description: 'Not found: resource not found'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+      deprecated: true
+  '/candidates/{id}/finish':
+    post:
+      tags:
+        - Candidate
+      summary: 'Mark candidates exam as successfully finished'
+      operationId: 44db11e28ad6cbec0ac77aa46fde8425
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CandidateRequest'
+      responses:
+        '204':
+          description: 'Candidate is marked as finished'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '404':
+          description: 'Not found: resource not found'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+  '/student_sessions/{id}/finish':
+    post:
+      tags:
+        - Student
+      summary: 'Use POST:Candidates:Finish'
+      operationId: b7eaf4cfe8c842fd48fcdab5e7705322
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CandidateRequest'
+      responses:
+        '204':
+          description: 'Candidate is marked as finished'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '404':
+          description: 'Not found: resource not found'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+      deprecated: true
+  '/candidates/{id}/logout':
+    post:
+      tags:
+        - Candidate
+      summary: 'Mark candidate as if he left the exam'
+      description: 'From the proctoring view this operation is same as finish'
+      operationId: b1231c3645ba351ccac21cf862ad547f
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CandidateRequest'
+      responses:
+        '204':
+          description: 'Candidate is deleted'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '404':
+          description: 'Not found: resource not found'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+  '/student_sessions/{id}/logout':
+    post:
+      tags:
+        - Student
+      summary: 'Mark candidate as if he left the exam'
+      description: 'Use POST:Candidates:Logout'
+      operationId: 69cc5c0d05db86bb150bfcb4bf531ddf
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CandidateRequest'
+      responses:
+        '204':
+          description: 'Candidate is deleted'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '404':
+          description: 'Not found: resource not found'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+      deprecated: true
+  /exams:
+    post:
+      tags:
+        - Exam
+      summary: 'Create new exam'
+      operationId: ba6fa322c9a927f1ff978a44dd104987
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExamRequest'
+      responses:
+        '200':
+          description: 'Exam is created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostExamResponse'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+  '/exams/{id}':
+    get:
+      tags:
+        - Exam
+      summary: 'Fetch exam'
+      operationId: 0426d8ef3366ec99f0f95ffc2a6ee477
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        -
+          name: timestamp
+          in: query
+          required: false
+          schema:
+            type: number
+            format: float
+        -
+          name: signature
+          in: query
+          required: false
+          schema:
+            type: string
+      requestBody:
+        description: 'Body can be used instead of query parameters'
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimpleRequest'
+      responses:
+        '200':
+          description: 'Exam is returned'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetExamResponse'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '404':
+          description: 'Not found: resource not found'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+    put:
+      tags:
+        - Exam
+      summary: 'Update existing exam'
+      operationId: d26095886886a5c4e6d721603e328ae8
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExamRequest'
+      responses:
+        '200':
+          description: 'Exam is updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutExamResponse'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '404':
+          description: 'Not found: resource not found'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+    delete:
+      tags:
+        - Exam
+      summary: 'Delete exam'
+      operationId: 7af064cff85a6dbfbc68d34a76dda0ea
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        -
+          name: timestamp
+          in: query
+          required: false
+          schema:
+            type: number
+            format: float
+        -
+          name: signature
+          in: query
+          required: false
+          schema:
+            type: string
+      requestBody:
+        description: 'Body can be used instead of query parameters'
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimpleRequest'
+      responses:
+        '204':
+          description: 'Exam is deleted'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '404':
+          description: 'Not found: resource not found'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+  '/exams/{id}/documents':
+    post:
+      tags:
+        - Exam
+      summary: 'Update infoForCandidates field in exam'
+      operationId: 6b1887f5eee89490f78d7cdfe0b07203
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExamDocumentRequest'
+      responses:
+        '200':
+          description: 'Exam is updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostExamDocumentResponse'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '404':
+          description: 'Not found: resource not found'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+      deprecated: true
+  '/exams/{id}/send_emails':
+    post:
+      tags:
+        - Exam
+      summary: 'Send invitation emails to candidates registered for the exam'
+      operationId: 733bbd193dc62b6a987e38962715fc7d
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        -
+          name: timestamp
+          in: query
+          required: false
+          deprecated: true
+          schema:
+            type: number
+            format: float
+        -
+          name: signature
+          in: query
+          required: false
+          deprecated: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimpleRequest'
+      responses:
+        '200':
+          description: 'Emails are sent'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostExamSendEmailsResponse'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '404':
+          description: 'Not found: resource not found'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+  '/exams/{id}/add_student':
+    post:
+      tags:
+        - Exam
+      summary: 'Use POST:Candidates'
+      operationId: b438de02cffa355206476c8423f3bf0e
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CandidateRequest'
+      responses:
+        '200':
+          description: 'Candidate is created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostCandidateResponse'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+      deprecated: true
+  '/exams/{id}/show_student':
+    get:
+      tags:
+        - Exam
+      summary: 'Use GET:Candidates'
+      operationId: 041a077db6a9f13055b34827208a658b
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+        -
+          name: timestamp
+          in: query
+          required: false
+          schema:
+            type: number
+            format: float
+        -
+          name: signature
+          in: query
+          required: false
+          schema:
+            type: string
+      requestBody:
+        description: 'Body can be used instead of query parameters'
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimpleRequest'
+      responses:
+        '200':
+          description: 'Candidate is returned'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCandidateResponse'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '404':
+          description: 'Not found: resource not found'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+      deprecated: true
+components:
+  schemas:
+    CandidatePayload:
+      properties:
+        Id:
+          description: ID
+          type: integer
+        Name:
+          description: 'Full name'
+          type: string
+        FirstName:
+          description: 'First name'
+          type: string
+        LastName:
+          description: 'Last name'
+          type: string
+        Email:
+          description: Email
+          type: string
+          format: email
+        Individual_info:
+          description: 'ID of the candidate'
+          type: string
+          nullable: true
+          deprecated: true
+        AdditionalInfo:
+          description: 'ID of the candidate'
+          type: string
+          nullable: true
+          deprecated: true
+        Token:
+          description: 'Unique token'
+          type: string
+        SessionToken:
+          description: 'Same as Token, compatibility reasons'
+          type: string
+          deprecated: true
+        ExamId:
+          description: 'ID of the exam'
+          type: integer
+        ExamFirstStartTime:
+          description: 'Start time for exam'
+          type: string
+        ExamLastStartTime:
+          description: 'Latest possible start time for exam'
+          type: string
+        AutoAssignProctor:
+          description: 'Proctor auto assignment is enabled'
+          type: boolean
+        AssignedProctorId:
+          description: 'Pre-assigned proctor id'
+          type: integer
+          nullable: true
+        AssignedProctorName:
+          description: 'Pre-assigned proctor name'
+          type: string
+          nullable: true
+        PhotoUrl:
+          description: 'URL to face photo'
+          type: string
+          nullable: true
+        IdentificationPhotoUrl:
+          description: 'URL to id card photo'
+          type: string
+          nullable: true
+        StartSessionTime:
+          description: 'Start time'
+          type: string
+          nullable: true
+        EndSessionTime:
+          description: 'End time'
+          type: string
+          nullable: true
+        ExamTotalTime:
+          description: 'Exam total time (end - start)'
+          type: string
+          nullable: true
+        SessionStatus:
+          description: 'Status of the session'
+          type: string
+        Status:
+          description: 'Status of the session, with "exam_started" instead of "STARTED" for compatibility reasons.'
+          type: string
+          deprecated: true
+      type: object
+    CandidateRequest:
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/SimpleRequest'
+        -
+          properties:
+            id:
+              description: 'Contains examId (for create request) or candidateId (for update request)'
+              type: integer
+              nullable: false
+              deprecated: true
+            examId:
+              description: 'ID of exam'
+              type: integer
+              nullable: false
+            email:
+              description: 'Email of the candidate'
+              type: string
+              format: email
+              nullable: false
+            name:
+              description: 'Full name of the candidate'
+              type: string
+              nullable: false
+              deprecated: true
+            firstName:
+              description: 'First name of the candidate'
+              type: string
+              nullable: false
+            lastName:
+              description: 'Last name of the candidate'
+              type: string
+              nullable: false
+            individual_info:
+              description: 'Individual info containing HTML with iframeUrl, compatibility reasons'
+              type: string
+              nullable: true
+              deprecated: true
+            iframeUrl:
+              description: 'URL for the candidates exam'
+              type: string
+              format: uri
+              nullable: true
+    ExamDocumentPayload:
+      properties:
+        Id:
+          type: integer
+        Exam_id:
+          type: integer
+        Exam_content:
+          type: string
+        Created_at:
+          type: string
+        Updated_at:
+          type: string
+      type: object
+    ExamDocumentRequest:
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/SimpleRequest'
+        -
+          properties:
+            content:
+              description: 'Content of infoForCandidates field'
+              type: string
+    ExamPayload:
+      properties:
+        Id:
+          description: ID
+          type: integer
+        Institute_Id:
+          description: 'Use InstituteId'
+          type: integer
+          deprecated: true
+        InstituteId:
+          description: 'ID of institute'
+          type: integer
+        Name:
+          description: Name
+          type: string
+        Type:
+          description: 'Type - currently only "live_proctoring"'
+          type: string
+        Status:
+          description: 'Status of the exam'
+          type: string
+        Duration_minutes:
+          description: 'Use DurationMinutes'
+          type: integer
+          deprecated: true
+        DurationMinutes:
+          description: 'Exam duration in minutes'
+          type: integer
+        Use_duration:
+          type: boolean
+          deprecated: true
+        Start_time:
+          description: 'Use FirstStartTime'
+          type: string
+          deprecated: true
+        FirstStartTime:
+          description: 'First possible time to start exam (when exam opens)'
+          type: string
+        End_time:
+          description: 'Use LastStartTime'
+          type: string
+          deprecated: true
+        LastStartTime:
+          description: 'Last possible time to start exam (before exam closes)'
+          type: string
+        Live_proctoring:
+          type: boolean
+          deprecated: true
+        save_personaldata:
+          description: 'Use SavePersonalData'
+          type: boolean
+          deprecated: true
+        SavePersonalData:
+          description: 'Whether to save data about candidates'
+          type: boolean
+        Created_at:
+          description: 'Use CreatedAt'
+          type: string
+          deprecated: true
+        CreatedAt:
+          description: 'Created at'
+          type: string
+        Updated_at:
+          description: 'Use UpdatedAt'
+          type: string
+          deprecated: true
+        UpdatedAt:
+          description: 'Last updated at'
+          type: string
+      type: object
+    ExamRequest:
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/SimpleRequest'
+        -
+          properties:
+            name:
+              description: Name
+              type: string
+              nullable: false
+            type:
+              description: 'Type of exam, currently only "live_proctoring"'
+              nullable: false
+            duration_minutes:
+              description: 'Use durationMinutes'
+              type: integer
+              nullable: false
+              deprecated: true
+            durationMinutes:
+              description: 'Duration in minutes'
+              type: integer
+              nullable: false
+            start_time:
+              description: 'Use firstStartTime'
+              nullable: false
+              deprecated: true
+            firstStartTime:
+              description: 'Earliest possible time to start an exam, timestamp in UTC+2'
+              type: number
+              format: float
+              nullable: false
+            end_time:
+              description: 'Use lastStartTime'
+              nullable: true
+              deprecated: true
+            lastStartTime:
+              description: 'Latest possible time to start an exam, timestamp in UTC+2, if null exam runs until midnight'
+              type: number
+              format: float
+              nullable: true
+            mobile_cam:
+              description: 'Use secondaryCam'
+              type: boolean
+              nullable: false
+              deprecated: true
+            secondaryCam:
+              description: 'Whether to require secondary cam'
+              type: boolean
+              nullable: false
+            save_personaldata:
+              description: 'Use savePersonalData'
+              type: boolean
+              nullable: false
+              deprecated: true
+            savePersonalData:
+              description: Name
+              type: boolean
+              nullable: false
+            allow_calculator:
+              description: 'Use allowCalculator'
+              type: boolean
+              nullable: false
+              deprecated: true
+            allowCalculator:
+              description: Name
+              type: boolean
+              nullable: false
+            allowed_calculator_type:
+              description: 'Use allowedCalculatorTypes'
+              type: boolean
+              nullable: true
+              deprecated: true
+            allowedCalculatorTypes:
+              description: 'Comma separated list of allowed items'
+              type: string
+              nullable: true
+            allow_pen_paper:
+              description: 'Use allowPenPaper'
+              type: boolean
+              nullable: false
+              deprecated: true
+            allowPenPaper:
+              description: Name
+              type: boolean
+              nullable: false
+            allow_external_applications:
+              description: 'Use allowExternalApplications'
+              type: boolean
+              nullable: false
+              deprecated: true
+            allowExternalApplications:
+              description: Name
+              type: boolean
+              nullable: false
+            allowed_external_applications:
+              description: 'Use allowedExternalApplications'
+              type: boolean
+              nullable: true
+              deprecated: true
+            allowedExternalApplications:
+              description: 'Comma separated list of allowed items'
+              type: string
+              nullable: true
+            allow_websites:
+              description: 'Use allowWebsites'
+              type: boolean
+              nullable: false
+              deprecated: true
+            allowWebsites:
+              description: Name
+              type: boolean
+              nullable: false
+            allowed_websites:
+              description: 'Use allowedWebsites'
+              type: boolean
+              nullable: true
+              deprecated: true
+            allowedWebsites:
+              description: 'Comma separated list of allowed items'
+              type: string
+              nullable: true
+            allow_textbooks:
+              description: 'Use allowTextbooks'
+              type: boolean
+              nullable: false
+              deprecated: true
+            allowTextbooks:
+              description: Name
+              type: boolean
+              nullable: false
+            allowed_textbooks:
+              description: 'Use allowedTextbooks'
+              type: boolean
+              nullable: true
+              deprecated: true
+            allowedTextbooks:
+              description: 'Comma separated list of allowed items'
+              type: string
+              nullable: true
+            allow_additional:
+              description: 'Use allowAdditional'
+              type: boolean
+              nullable: false
+              deprecated: true
+            allowAdditionalResources:
+              description: Name
+              type: boolean
+              nullable: false
+            allowed_additional:
+              description: 'Use allowedAdditional'
+              type: boolean
+              nullable: true
+              deprecated: true
+            allowedAdditionalResources:
+              description: 'Comma separated list of allowed items'
+              type: string
+              nullable: true
+    GetCandidateResponse:
+      properties:
+        Student:
+          $ref: '#/components/schemas/CandidatePayload'
+      type: object
+    GetExamResponse:
+      properties:
+        Exam:
+          $ref: '#/components/schemas/ExamPayload'
+      type: object
+    PostCandidateResponse:
+      properties:
+        Student:
+          $ref: '#/components/schemas/CandidatePayload'
+      type: object
+    PostExamDocumentResponse:
+      properties:
+        Document:
+          $ref: '#/components/schemas/ExamDocumentPayload'
+      type: object
+    PostExamResponse:
+      properties:
+        Exam:
+          $ref: '#/components/schemas/ExamPayload'
+      type: object
+    PostExamSendEmailsResponse:
+      properties:
+        Students:
+          description: Payload
+          type: array
+          items:
+            $ref: '#/components/schemas/CandidatePayload'
+      type: object
+    SimpleRequest:
+      properties:
+        signature:
+          description: 'Signature - HMAC SHA256 hash of a content'
+          type: string
+          nullable: false
+        timestamp:
+          description: 'Timestamp - the request is not executed if timestamp is older than 2 hours'
+          type: number
+          format: float
+          nullable: false
+      type: object
+    PutCandidateResponse:
+      properties:
+        Student:
+          $ref: '#/components/schemas/CandidatePayload'
+      type: object
+    PutExamResponse:
+      properties:
+        Exam:
+          $ref: '#/components/schemas/ExamPayload'
+      type: object
+  securitySchemes:
+    DefaultAuthorization:
+      type: http
+      bearerFormat: 'Token is placed inside Authorization header after token keyword'
+      scheme: bearer
+security:
+  -
+    DefaultAuthorization: []
