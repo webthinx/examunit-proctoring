@@ -1204,3 +1204,6 @@ components:
 security:
   -
     DefaultAuthorization: []
+externalDocs:
+  description: 'Issue tracker and release log on Github'
+  url: 'https://github.com/webthinx/examunit-proctoring'
