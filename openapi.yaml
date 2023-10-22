@@ -804,9 +804,11 @@ components:
         ExamFirstStartTime:
           description: 'Start time for exam'
           type: string
+          format: date-time
         ExamLastStartTime:
           description: 'Latest possible start time for exam'
           type: string
+          format: date-time
         AutoAssignProctor:
           description: 'Proctor auto assignment is enabled'
           type: boolean
@@ -821,30 +823,51 @@ components:
         PhotoUrl:
           description: 'URL to face photo'
           type: string
+          format: uri
           nullable: true
         IdentificationPhotoUrl:
           description: 'URL to id card photo'
           type: string
+          format: uri
           nullable: true
         StartSessionTime:
           description: 'Start time'
           type: string
+          format: date-time
           nullable: true
         EndSessionTime:
           description: 'End time'
           type: string
+          format: date-time
           nullable: true
         ExamTotalTime:
-          description: 'Exam total time (end - start)'
+          description: 'Session duration (end - start)'
           type: string
           nullable: true
         SessionStatus:
           description: 'Status of the session'
           type: string
+          enum:
+            - NONE
+            - JOINED
+            - APPROVAL_REQUESTED
+            - APPROVED
+            - STARTED
+            - FINISHED
+            - DISMISSED
+            - CLOSED
         Status:
           description: 'Status of the session, with "exam_started" instead of "STARTED" for compatibility reasons.'
           type: string
           deprecated: true
+        CreatedAt:
+          description: 'Created at'
+          type: string
+          format: date-time
+        UpdatedAt:
+          description: 'Last updated at'
+          type: string
+          format: date-time
       type: object
     CandidateRequest:
       type: object
@@ -951,6 +974,7 @@ components:
         FirstStartTime:
           description: 'First possible time to start exam (when exam opens)'
           type: string
+          format: date-time
         End_time:
           description: 'Use LastStartTime'
           type: string
@@ -958,6 +982,7 @@ components:
         LastStartTime:
           description: 'Last possible time to start exam (before exam closes)'
           type: string
+          format: date-time
         Live_proctoring:
           type: boolean
           deprecated: true
@@ -975,6 +1000,7 @@ components:
         CreatedAt:
           description: 'Created at'
           type: string
+          format: date-time
         Updated_at:
           description: 'Use UpdatedAt'
           type: string
@@ -982,6 +1008,7 @@ components:
         UpdatedAt:
           description: 'Last updated at'
           type: string
+          format: date-time
       type: object
     ExamRequest:
       type: object
