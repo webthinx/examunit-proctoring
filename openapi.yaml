@@ -19,7 +19,7 @@ paths:
       tags:
         - Candidate
       summary: 'Create new candidate'
-      operationId: 34cb7666e1d72f58ff1b6a9553a7a45b
+      operationId: 572747dcf54370e967f0ea3e8f5ef352
       requestBody:
         required: true
         content:
@@ -44,7 +44,7 @@ paths:
       tags:
         - Student
       summary: 'Use POST:Candidates'
-      operationId: 1ced16963f700e1004351722b0714051
+      operationId: f3650358e6743fcfc28b1c9254a713bc
       requestBody:
         required: true
         content:
@@ -70,7 +70,7 @@ paths:
       tags:
         - Candidate
       summary: 'Fetch candidate'
-      operationId: 610f63ae229dac1b68c2778287e248d2
+      operationId: c48735c1d63972a7a0fb0b23d0c9fd7e
       parameters:
         -
           name: id
@@ -117,7 +117,7 @@ paths:
       tags:
         - Candidate
       summary: 'Update existing candidate'
-      operationId: 74d5a20856e2554d3fbc7e7d9921d1cf
+      operationId: fe3e05e19a071e1576509246c2d6c390
       parameters:
         -
           name: id
@@ -150,7 +150,7 @@ paths:
       tags:
         - Candidate
       summary: 'Delete candidate'
-      operationId: 13a2a7c14857ae659260fc8fc1a428c0
+      operationId: 1f0f66c557489df624cb1e7c81bdf7a6
       parameters:
         -
           name: id
@@ -194,7 +194,7 @@ paths:
       tags:
         - Student
       summary: 'Use GET:Candidates'
-      operationId: d8e581cca9335a9eaa01d0c8010f17ae
+      operationId: 38af38d9ad6c3cd88ebd85bae024c363
       parameters:
         -
           name: id
@@ -242,7 +242,7 @@ paths:
       tags:
         - Student
       summary: 'Use PUT:Candidates'
-      operationId: 4ba8875fdd392818883ce342b8c82bab
+      operationId: 647f44b8a69130492cb58d065869aac9
       parameters:
         -
           name: id
@@ -276,7 +276,7 @@ paths:
       tags:
         - Student
       summary: 'Use DELETE:Candidates'
-      operationId: f5e2719573d1fb9add4e8906abfcad0f
+      operationId: 05909b2333e0400b08fa60271e68c7da
       parameters:
         -
           name: id
@@ -321,7 +321,7 @@ paths:
       tags:
         - Candidate
       summary: 'Mark candidates exam as successfully finished'
-      operationId: 44db11e28ad6cbec0ac77aa46fde8425
+      operationId: 7961e0087858bd7173582e443e7dda77
       parameters:
         -
           name: id
@@ -351,7 +351,7 @@ paths:
       tags:
         - Student
       summary: 'Use POST:Candidates:Finish'
-      operationId: b7eaf4cfe8c842fd48fcdab5e7705322
+      operationId: 5568f7d5c40ef81babd015fd2be50633
       parameters:
         -
           name: id
@@ -383,7 +383,7 @@ paths:
         - Candidate
       summary: 'Mark candidate as if he left the exam'
       description: 'From the proctoring view this operation is same as finish'
-      operationId: b1231c3645ba351ccac21cf862ad547f
+      operationId: f018788c031933cba2901b4ad7b2e391
       parameters:
         -
           name: id
@@ -414,7 +414,7 @@ paths:
         - Student
       summary: 'Mark candidate as if he left the exam'
       description: 'Use POST:Candidates:Logout'
-      operationId: 69cc5c0d05db86bb150bfcb4bf531ddf
+      operationId: 8d4f8b86f8f8aa6331cf1e862dc32bab
       parameters:
         -
           name: id
@@ -445,7 +445,7 @@ paths:
       tags:
         - Exam
       summary: 'Create new exam'
-      operationId: ba6fa322c9a927f1ff978a44dd104987
+      operationId: b50c3e5d8d84eb98fd8a37f233a135c5
       requestBody:
         required: true
         content:
@@ -470,7 +470,7 @@ paths:
       tags:
         - Exam
       summary: 'Fetch exam'
-      operationId: 0426d8ef3366ec99f0f95ffc2a6ee477
+      operationId: 673b410a6971ae50a072f4bd04b7ca7e
       parameters:
         -
           name: id
@@ -517,7 +517,7 @@ paths:
       tags:
         - Exam
       summary: 'Update existing exam'
-      operationId: d26095886886a5c4e6d721603e328ae8
+      operationId: 6ad5dd18654a92727979d13541a4e37c
       parameters:
         -
           name: id
@@ -550,7 +550,7 @@ paths:
       tags:
         - Exam
       summary: 'Delete exam'
-      operationId: 7af064cff85a6dbfbc68d34a76dda0ea
+      operationId: 1e4c682c37eec60e90da995a674a2614
       parameters:
         -
           name: id
@@ -594,7 +594,7 @@ paths:
       tags:
         - Exam
       summary: 'Update infoForCandidates field in exam'
-      operationId: 6b1887f5eee89490f78d7cdfe0b07203
+      operationId: 22c55e95ef1e914fc6d99a335573dc99
       parameters:
         -
           name: id
@@ -629,7 +629,7 @@ paths:
       tags:
         - Exam
       summary: 'Send invitation emails to candidates registered for the exam'
-      operationId: 733bbd193dc62b6a987e38962715fc7d
+      operationId: 88826969d83c5eb2959f272d85a3829f
       parameters:
         -
           name: id
@@ -678,7 +678,7 @@ paths:
       tags:
         - Exam
       summary: 'Use POST:Candidates'
-      operationId: b438de02cffa355206476c8423f3bf0e
+      operationId: fd125288e6cd8c581e628b72b86dc7a9
       parameters:
         -
           name: id
@@ -711,7 +711,7 @@ paths:
       tags:
         - Exam
       summary: 'Use GET:Candidates'
-      operationId: 041a077db6a9f13055b34827208a658b
+      operationId: c211e8c2ff546dae0a5356296e7bee3f
       parameters:
         -
           name: id
@@ -781,16 +781,6 @@ components:
           description: Email
           type: string
           format: email
-        Individual_info:
-          description: 'ID of the candidate'
-          type: string
-          nullable: true
-          deprecated: true
-        AdditionalInfo:
-          description: 'ID of the candidate'
-          type: string
-          nullable: true
-          deprecated: true
         Token:
           description: 'Unique token'
           type: string
@@ -941,10 +931,6 @@ components:
         Id:
           description: ID
           type: integer
-        Institute_Id:
-          description: 'Use InstituteId'
-          type: integer
-          deprecated: true
         InstituteId:
           description: 'ID of institute'
           type: integer
@@ -952,59 +938,37 @@ components:
           description: Name
           type: string
         Type:
-          description: 'Type - currently only "live_proctoring"'
+          description: 'Type - currently only "LIVE_PROCTORING is supported"'
           type: string
+          enum:
+            - LIVE_PROCTORING
+            - RECORD_REVIEW
         Status:
           description: 'Status of the exam'
           type: string
-        Duration_minutes:
-          description: 'Use DurationMinutes'
-          type: integer
-          deprecated: true
+          enum:
+            - UPCOMING
+            - RUNNING
+            - CLOSING
+            - COMPLETED
         DurationMinutes:
           description: 'Exam duration in minutes'
           type: integer
-        Use_duration:
-          type: boolean
-          deprecated: true
-        Start_time:
-          description: 'Use FirstStartTime'
-          type: string
-          deprecated: true
         FirstStartTime:
           description: 'First possible time to start exam (when exam opens)'
           type: string
           format: date-time
-        End_time:
-          description: 'Use LastStartTime'
-          type: string
-          deprecated: true
         LastStartTime:
           description: 'Last possible time to start exam (before exam closes)'
           type: string
           format: date-time
-        Live_proctoring:
-          type: boolean
-          deprecated: true
-        save_personaldata:
-          description: 'Use SavePersonalData'
-          type: boolean
-          deprecated: true
         SavePersonalData:
           description: 'Whether to save data about candidates'
           type: boolean
-        Created_at:
-          description: 'Use CreatedAt'
-          type: string
-          deprecated: true
         CreatedAt:
           description: 'Created at'
           type: string
           format: date-time
-        Updated_at:
-          description: 'Use UpdatedAt'
-          type: string
-          deprecated: true
         UpdatedAt:
           description: 'Last updated at'
           type: string
@@ -1022,7 +986,12 @@ components:
               type: string
               nullable: false
             type:
-              description: 'Type of exam, currently only "live_proctoring"'
+              description: 'Type of exam, lowercase values are deprecated'
+              enum:
+                - LIVE_PROCTORING
+                - RECORD_REVIEW
+                - live_proctoring
+                - record_review
               nullable: false
             duration_minutes:
               description: 'Use durationMinutes'
