@@ -1,87 +1,89 @@
-# ExamUnit proctoring
+I've reviewed your API documentation and made some grammar, punctuation, and wording improvements. Here's the revised version:
 
-Documentation for OpenAPI connector
+# ExamUnit Proctoring
+
+Documentation for the OpenAPI Connector
 
 ## Definitions
 
 - **Service** - ExamUnit proctoring service
-- **Service provider** - Legal entity providing the **Service**
-- **Service API** - API to programatically manage the **Service**
-- **Client** - Foreign application connecting to the **Service API**
-- **Candidate application** - Web application where a candidate is being examined
-- **Administration application** - Restricted web application accessible for proctors and administrators. Some sections are only available for administrators
-- **Incident** - Event happening in the process of candidate examination. May be an action triggered by candidate, by proctor or automatically.
+- **Service provider** - A legal entity that provides the **Service**
+- **Service API** - An API for programmatically managing the **Service**
+- **Client** - A foreign application connecting to the **Service API**
+- **Candidate application** - A web application where a candidate is being examined
+- **Administration application** - A restricted web application accessible to proctors and administrators. Some sections are only available to administrators
+- **Incident** - An event that occurs in the process of candidate examination. It may be an action triggered by the candidate, the proctor, or an automated action.
 
-This document is describing the usage of **Service API**.
+This document describes the usage of the **Service API**.
 
-## Prerequisities
+## Prerequisites
 
 - `Secret key` and `Access key`
-    - Request access to administration by contacting **Service provider**.
-    - Keys to access the **Service API** can be found in **Aministration application** under `Institute settings -> General`.
-    - Make sure that your `Secret key` remains private.
+    - Request access to administration by contacting the **Service provider**.
+    - Keys to access the **Service API** can be found in the **Administration application** under `Institute settings -> General`.
+    - Ensure that your `Secret key` remains private.
 
 ## Authorization
 
-Access to the functionality of **Service API** is granted to **Clients** implementing following authentication mechanism.
+Access to the functionality of the **Service API** is granted to **Clients** implementing the following authentication mechanism.
 
-- Provide your `Access key` in `Authorization` header using the `token` auth scheme.
-    - `Authorization: token 7Q89vDKu7izp5Zd4QGHSdByUTNxcI68GIi0v7zZRrwr4LgNWvfnRBr`
-- Sign the request and provide the result withing the `signature` field.
-    - Signature is a HMAC-sha256 hash (using the `Secret key` as a key) of the string built with all the request parameters in the format `name=value` joined by `?` and ordered alphabethically by name.
-    - Example of code generating the signature can be found below.
-- Make sure the `timestamp` field is not older than 1 hour. Expected timestamp timezone is UTC+2.
+- Provide your `Access key` in the `Authorization` header using the `token` auth scheme.
+    - Example: `Authorization: token 7Q89vDKu7izp5Zd4QGHSdByUTNxcI68GIi0v7zZRrwr4LgNWvfnRBr`
+- Sign the request and provide the result in the `signature` field.
+    - The signature is an HMAC-SHA256 hash (using the `Secret key` as a key) of the string built with all the request parameters in the format `name=value`, joined by `?`, and ordered alphabetically by name.
+    - An example of code generating the signature can be found below.
+- Ensure that the `timestamp` field is not older than 1 hour. The expected timestamp timezone is UTC+2.
 
 ```php
 /**
  * @param string                $secretKey Your secret key
- * @param array<string, scalar> $data      All other request fields in associative array, including timestamp.
- * @return string                          Generated signature which is appended to the data.
+ * @param array<string, scalar> $data      All other request fields in an associative array, including timestamp.
+ * @return string                          The generated signature, which is appended to the data.
  */
 function createSignature(string $secretKey, array $data) : string
 {
-    // aplhabetically sort by key
+    // Alphabetically sort by key
     \ksort($data);
 
     $strings = [];
 
     foreach ($data as $key => $value) {
-        // generate the name=value strings
+        // Generate the name=value strings
         $strings[] = $key . '=' . \getStringValue($value);
     }
 
-    // join the strings using ?
+    // Join the strings using ?
     $stringToSign = \implode('?', $strings);
 
-    // generate signature
+    // Generate the signature
     return \hash_hmac('sha256', $stringToSign, $secretKey);
 }
 
 function getStringValue(string|int|float|bool $value) : string
 {
-    // booleans are converted to their textual form
+    // Booleans are converted to their textual form
     if (\is_bool($value)) {
         return $value
             ? 'true'
             : 'false';
     }
 
-    // integers and floats are converted to string
+    // Integers and floats are converted to strings
     return (string) $value;
 }
 ```
 
-## Endpoints and fields
+## Endpoints and Fields
 
-Whole functionality of **Service API** is described using [OpenAPI specification](https://swagger.io/specification/). Specification covers all aspects of the API, including endpoints, request structure, response structure and is also accompanied with descriptions and examples. The schema in its current version can be found [in a yaml file](https://github.com/webthinx/examunit-proctoring/blob/main/openapi.yaml) located in the root of this repository.
+The entire functionality of the **Service API** is described using the [OpenAPI specification](https://swagger.io/specification/). The specification covers all aspects of the API, including endpoints, request structure, response structure, and is also accompanied by descriptions and examples. The schema in its current version can be found in a [YAML file](https://github.com/webthinx/examunit-proctoring/blob/main/openapi.yaml) located in the root of this repository.
 
 ## Webhooks
 
-TBA intro, configuration
+Introduction and Configuration To Be Announced (TBA)
 
 ### Content
 
-Content of the webhook payload is following this structure:
+The content of the webhook payload follows this structure:
 
 ```json
 {
@@ -92,25 +94,25 @@ Content of the webhook payload is following this structure:
 }
 ```
 
-|Field|Description|Nullable|
-|-----|-----------|--------|
-|`timestamp`|Datetime information as string in RFC 3339 format|`false`|
-|`candidateId`|ID of a candidate as integer|`false`|
-|`incidentType`|IncidentType as string enum value|`false`|
-|`additionalData`|Some additional data, varies depending on IncidentType|`true`|
+| Field           | Description                                    | Nullable |
+|-----------------|-----------------------------------------------|----------|
+| `timestamp`     | Datetime information as a string in RFC 3339 format | `false`  |
+| `candidateId`   | ID of a candidate as an integer              | `false`  |
+| `incidentType`  | IncidentType as a string enum value          | `false`  |
+| `additionalData`| Some additional data, which varies depending on the IncidentType | `true` |
 
-#### Incident types
+#### Incident Types
 
-TBA list enum values and corresponding additionalData
+TBA: List of enum values and corresponding additionalData
 
 ### Signature
 
-In order to validate that webhook was sent from a trusted service, a following mechanism should be applied.
+To validate that the webhook was sent from a trusted service, the following mechanism should be applied.
 
 - Validate the webhook signature, which is present in the `X-Signature` header.
-    - Signature is a HMAC-sha256 hash (using the `Secret key` as a key) of the request body.
-- Make sure the `timestamp` field is not older than 1 hour.
+    - The signature is an HMAC-SHA256 hash (using the `Secret key` as a key) of the request body.
+- Ensure that the `timestamp` field is not older than 1 hour.
 
 ### Retries
 
-TBA 
+TBA (To Be Announced)
