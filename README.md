@@ -80,7 +80,7 @@ TBA intro, configuration
 
 ### Content
 
-Contents of the webhook payload is following this structure:
+Content of the webhook payload is following this structure:
 
 ```json
 {
