@@ -32,13 +32,13 @@ Access to the **Service API** is granted by following the given mechanism.
     - `Authorization: token 7Q89vDKu7izp5Zd4QGHSdByUTNxcI68GIi0v7zZRrwr4LgNWvfnRBr`
 - Sign the request and provide the result withing the `signature` field.
     - Signature is a HMAC-sha256 hash (using the `Secret key` as a key) of the string built with all the request parameters in the format `name=value` joined by `?` and ordered alphabethically by name.
-    - Example of PHP code generating the signature can be found bellow.
+    - Example of code generating the signature can be found below.
 - Make sure the `timestamp` field is not older than 1 hour. Expected timestamp timezone is UTC+2.
 
 ```php
 /**
  * @param string                $secretKey Your secret key
- * @param array<string, scalar> $data      All other fields of request data in associative array, including timestamp.
+ * @param array<string, scalar> $data      All other request fields in associative array, including timestamp.
  * @return string                          Generated signature which is appended to the data.
  */
 function createSignature(string $secretKey, array $data) : string
