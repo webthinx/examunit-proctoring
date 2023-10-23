@@ -46,7 +46,7 @@ function createSignature(string $secretKey, array $data) : string
 
     foreach ($data as $key => $value) {
         // generate the name=value strings
-        $strings[] = $key . '=' . self::getStringValue($value);
+        $strings[] = $key . '=' . getStringValue($value);
     }
 
     // join the strings using ?
