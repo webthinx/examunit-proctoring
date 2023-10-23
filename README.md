@@ -7,13 +7,8 @@ Documentation for OpenAPI connector
 - **Service** - ExamUnit proctoring service
 - **Service provider** - Legal entity providing the **Service**
 - **Service API** - API to programatically manage the **Service**
-- **Candidate** - 
-- **Exam** - 
-- **Institute** -
-- **Proctor** - 
-- **Institute administrator** - 
 - **Candidate application** - Web application where a **Candidate** is being examined
-- **Administration application** - Restricted web application accessible for **Proctors** and **Institute administrators**. Some sections are only available for **Institute administrators**.
+- **Administration application** - Restricted web application accessible for proctors and administrators. Some sections are only available for administrators.
 
 This document is describing the usage of **Service API**.
 
@@ -21,7 +16,7 @@ This document is describing the usage of **Service API**.
 
 - `Secret key` and `Access key`
     - Request access to administration by contacting **Service provider**.
-    - Keys to access the **Service API** for your **Institute** can be found in **Aministration application** under `Institute settings -> General`.
+    - Keys to access the **Service API** can be found in **Aministration application** under `Institute settings -> General`.
     - Make sure that your `Secret key` remains private.
 
 ## Authorization
@@ -73,3 +68,11 @@ function getStringValue(mixed $value) : string
     return (string) $value;
 }
 ```
+
+## Endpoints and fields
+
+Whole functionality of **Service API** is described using [OpenAPI specification](https://swagger.io/specification/). Specification covers all aspects of the API, including endpoints, request structure, response structure and is also accompanied with descriptions and examples. The schema in its current version can be found [in yaml file in the root of this repository](https://github.com/webthinx/examunit-proctoring/blob/main/openapi.yaml).
+
+## Webhooks
+
+TBA
