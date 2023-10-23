@@ -35,8 +35,8 @@ Access to the functionality of the **Service API** is granted to **Clients** imp
 ```php
 /**
  * @param string                $secretKey Your secret key
- * @param array<string, scalar> $data      All other request fields in an associative array, including timestamp.
- * @return string                          The generated signature, which is appended to the data.
+ * @param array<string, scalar> $data      All other request fields in an associative array, including timestamp
+ * @return string                          The generated signature, which is appended to the data
  */
 function createSignature(string $secretKey, array $data) : string
 {
