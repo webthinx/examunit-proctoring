@@ -1,11 +1,13 @@
 openapi: 3.0.0
 info:
-  title: 'ExamUnit: OpenAPI interface'
+  title: 'ExamUnit: Proctoring interface'
+  description: 'Interface to manage proctoring application. For documentation, issue tracking and release information please visit our Github repository.'
+  #termsOfService: 'TermsOfService TBA'
   contact:
     name: 'Webthinx s.r.o.'
     url: 'https://webthinx.com'
     email: vaclav.pelisek@webthinx.com
-  version: '0.1'
+  version: 0.1.1
 servers:
   -
     url: proctoringapi.examunit.com/openapi/
@@ -788,6 +790,14 @@ components:
           description: 'Same as Token, compatibility reasons'
           type: string
           deprecated: true
+        Url:
+          description: 'URL to the proctoring application where the candidate will be examined'
+          type: string
+          format: uri
+        SystemCheckUrl:
+          description: 'URL to the proctoring application where candidate performs system-check'
+          type: string
+          format: uri
         ExamId:
           description: 'ID of the exam'
           type: integer
