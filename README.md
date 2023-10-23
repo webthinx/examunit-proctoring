@@ -46,7 +46,7 @@ function createSignature(string $secretKey, array $data) : string
 
     foreach ($data as $key => $value) {
         // generate the name=value strings
-        $strings[] = $key . '=' . getStringValue($value);
+        $strings[] = $key . '=' . \getStringValue($value);
     }
 
     // join the strings using ?
@@ -56,7 +56,7 @@ function createSignature(string $secretKey, array $data) : string
     return \hash_hmac('sha256', $stringToSign, $secretKey);
 }
 
-function getStringValue(mixed $value) : string
+function getStringValue(string|int|float|bool $value) : string
 {
     // booleans are converted to their textual form
     if (\is_bool($value)) {
