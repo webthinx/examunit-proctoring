@@ -71,7 +71,7 @@ function getStringValue(mixed $value) : string
 
 ## Endpoints and fields
 
-Whole functionality of **Service API** is described using [OpenAPI specification](https://swagger.io/specification/). Specification covers all aspects of the API, including endpoints, request structure, response structure and is also accompanied with descriptions and examples. The schema in its current version can be found [in yaml file in the root of this repository](https://github.com/webthinx/examunit-proctoring/blob/main/openapi.yaml).
+Whole functionality of **Service API** is described using [OpenAPI specification](https://swagger.io/specification/). Specification covers all aspects of the API, including endpoints, request structure, response structure and is also accompanied with descriptions and examples. The schema in its current version can be found [in a yaml file](https://github.com/webthinx/examunit-proctoring/blob/main/openapi.yaml) located in the root of this repository.
 
 ## Webhooks
 
