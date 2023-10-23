@@ -1,5 +1,3 @@
-I've reviewed your API documentation and made some grammar, punctuation, and wording improvements. Here's the revised version:
-
 # ExamUnit Proctoring
 
 Documentation for the OpenAPI Connector
