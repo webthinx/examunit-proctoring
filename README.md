@@ -7,6 +7,7 @@ Documentation for OpenAPI connector
 - **Service** - ExamUnit proctoring service
 - **Service provider** - Legal entity providing the **Service**
 - **Service API** - API to programatically manage the **Service**
+- **Client** - Foreign application connecting to the **Service API**
 - **Candidate application** - Web application where a candidate is being examined
 - **Administration application** - Restricted web application accessible for proctors and administrators. Some sections are only available for administrators
 - **Incident** - Event happening in the process of candidate examination. May be an action triggered by candidate, by proctor or automatically.
@@ -22,7 +23,7 @@ This document is describing the usage of **Service API**.
 
 ## Authorization
 
-Access to the functionality of **Service API** is granted by following the given mechanism.
+Access to the functionality of **Service API** is granted to **Clients** implementing following authentication mechanism.
 
 - Provide your `Access key` in `Authorization` header using the `token` auth scheme.
     - `Authorization: token 7Q89vDKu7izp5Zd4QGHSdByUTNxcI68GIi0v7zZRrwr4LgNWvfnRBr`
@@ -104,7 +105,7 @@ TBA list enum values and corresponding additionalData
 
 ### Signature
 
-In order to validate that webhook was indeed sent from the right service, the following mechanism should be applied.
+In order to validate that webhook was sent from a trusted service, a following mechanism should be applied.
 
 - Validate the webhook signature, which is present in the `X-Signature` header.
     - Signature is a HMAC-sha256 hash (using the `Secret key` as a key) of the request body.
