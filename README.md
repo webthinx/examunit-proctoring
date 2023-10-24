@@ -91,7 +91,7 @@ The entire functionality of the **Service API** is described using the [OpenAPI 
 
 ## Webhooks
 
-Introduction and Configuration To Be Announced (TBA)
+
 
 ### Content
 
@@ -100,18 +100,20 @@ The content of the webhook payload follows this structure:
 ```json
 {
     "timestamp": "1985-04-12T23:20:50.52Z",
+    "triggeredAt": "1985-04-12T23:20:50.52Z",
     "candidateId": 255,
     "incidentType": "SESSION_STARTED",
     "additionalData": null
 }
 ```
 
-| Field           | Description                                    | Nullable |
-|-----------------|-----------------------------------------------|----------|
-| `timestamp`     | Datetime information as a string in RFC 3339 format | `false`  |
-| `candidateId`   | ID of a candidate as an integer              | `false`  |
-| `incidentType`  | IncidentType as a string enum value          | `false`  |
-| `additionalData`| Some additional data, which varies depending on the IncidentType | `true` |
+| Field           | Description                                                                                                                              | Format                                 | Nullable |
+|-----------------|------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------|----------|
+| `timestamp`     | Request time information                                                                                                                 | string in RFC 3339 format              | `false`  |
+| `trigerredAt`   | Time information describing when the event was originally triggered. This value differs from timestamp in a case of a Retry (see below). | string in RFC 3339 format              | `false`  |
+| `candidateId`   | ID of a candidate                                                                                                                        | integer                                | `false`  |
+| `incidentType`  | Type of an event                                                                                                                         | string enum value                      | `false`  |
+| `additionalData`| Some additional data                                                                                                                     | varies depending on the `incidentType` | `true`   |
 
 #### Incident Types
 
