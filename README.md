@@ -187,8 +187,8 @@ To validate that the webhook was sent from a trusted service, apply the followin
 ### Status handling and retries
 
 - The expected response status is any 2xx status.
-- Webhooks do not follow redirects.
-- When a 4xx status is encountered, the webhook is considered sent and will not be retried.
+- When a 3xx or 4xx status is encountered, the webhook is considered sent and will not be retried.
+    - Webhooks do not follow redirects.
 - When a 5xx status is encountered, the **Service** will perform multiple additional attempts after a reasonable time interval.
     - The `timestamp` field in the payload changes to the time when each attempt was sent.
     - The `triggeredAt` field maintains its original value.
