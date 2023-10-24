@@ -182,7 +182,7 @@ To validate that the webhook was sent from a trusted service, apply the followin
 
 - Validate the webhook signature, which is present in the `X-Signature` header.
     - The signature is an HMAC-SHA256 hash (using the `Secret key` as the key) of the request body.
-- Ensure that the `timestamp` field is not older than 1 hour.
+- Ensure that the `timestamp` field is not older than 1 hour (or other reasonable amount of time).
 
 ### Status handling and retries
 
