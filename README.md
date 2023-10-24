@@ -7,28 +7,28 @@ Documentation for the OpenAPI Connector
 - **Service** - ExamUnit proctoring service
 - **Service provider** - A legal entity that provides the **Service**
 - **Service API** - An API for programmatically managing the **Service**
-- **Client** - A foreign application connecting to the **Service API**
-- **Candidate application** - A web application where a candidate is being examined
-- **Administration application** - A restricted web application accessible to proctors and administrators. Some sections are only available to administrators
-- **Incident** - An event that occurs in the process of candidate examination. It may be an action triggered by the candidate, the proctor, or an automated action.
+- **Client** - A third-party application connecting to the **Service API**
+- **Candidate application** - A web application where a candidate undergoes examination
+- **Administration application** - A restricted web application accessible to proctors and administrators. Some sections are exclusively available to administrators.
+- **Incident** - An event that occurs during the candidate examination process. It may be triggered by the candidate, the proctor, or an automated action.
 
 This document describes the usage of the **Service API**.
 
 ## Prerequisites
 
 - `Secret key` and `Access key`
-    - Request access to administration by contacting the **Service provider**.
+    - Request access to the administration by contacting the **Service provider**.
     - Keys to access the **Service API** can be found in the **Administration application** under `Institute settings -> General`.
-    - Ensure that your `Secret key` remains private.
+    - Ensure the confidentiality of your `Secret key`.
 
 ## Authorization
 
 Access to the functionality of the **Service API** is granted to **Clients** implementing the following authentication mechanism.
 
-- Provide your `Access key` in the `Authorization` header using the `token` auth scheme.
+- Include your `Access key` in the `Authorization` header using the `token` authentication scheme.
     - Example: `Authorization: token 7Q89vDKu7izp5Zd4QGHSdByUTNxcI68GIi0v7zZRrwr4LgNWvfnRBr`
 - Sign the request and provide the result in the `signature` field.
-    - The signature is an HMAC-SHA256 hash (using the `Secret key` as a key) of the string built with all the request parameters in the format `name=value`, joined by `?`, and ordered alphabetically by name.
+    - The signature is an HMAC-SHA256 hash (using the `Secret key` as the key) of the string built with all the request parameters in the format `name=value`, joined by `?`, and ordered alphabetically by name.
     - An example of code generating the signature can be found below.
 - Ensure that the `timestamp` field is not older than 1 hour. The expected timestamp timezone is UTC+2.
 
@@ -70,28 +70,28 @@ function getStringValue(string|int|float|bool $value) : string
     return (string) $value;
 }
 
-// Fetch secret key from secure storage - such as environment, database, ...
+// Fetch the secret key from secure storage - such as the environment, database, ...
 $secretKey = 'dummyValue';
 
-// Example of an requst data
+// Example of a request data
 $request = [
     'timestamp' => 1698130780.0,
 ];
 
-// Append generated signature to the request
+// Append the generated signature to the request
 $request['signature'] = \createSignature($secretKey, $request);
 
-// Json encode whole payload
+// JSON encode the whole payload
 $signedPayload = \json_encode($request);
 ```
 
 ## Endpoints and Fields
 
-The entire functionality of the **Service API** is described using the [OpenAPI specification](https://swagger.io/specification/). The specification covers all aspects of the API, including endpoints, request structure, response structure, and is also accompanied by descriptions and examples. The schema in its current version can be found in a [YAML file](https://github.com/webthinx/examunit-proctoring/blob/main/openapi.yaml) located in the root of this repository.
+The entire functionality of the **Service API** is described using the [OpenAPI specification](https://swagger.io/specification/). The specification covers all aspects of the API, including endpoints, request structure, response structure, and is also accompanied by descriptions and examples. The current version of the schema can be found in a [YAML file](https://github.com/webthinx/examunit-proctoring/blob/main/openapi.yaml) located in the root of this repository.
 
 ## Webhooks
 
-The functions of the **Service API** are initially limited to pulling data, which can be somewhat impractical. Webhooks introduce the possibility to receive real-time notifications about events happening in the **Service**. Webhooks are triggered when an **Incident** occurs in the candidate's flow. **Incidents** have various types depending on the nature of the underlying event. Configuration allows the **Client** to limit listening only to a relevant subset of incident types.
+Initially, the functions of the **Service API** are limited to pulling data, which can be somewhat impractical. Webhooks introduce the possibility to receive real-time notifications about events happening in the **Service**. Webhooks are triggered when an **Incident** occurs in the candidate's flow. **Incidents** have various types depending on the nature of the underlying event. Configuration allows the **Client** to limit listening only to a relevant subset of incident types.
 
 ### Configuration
 
@@ -181,14 +181,14 @@ Enum values of SystemCheck / IdentityCheck steps:
 To validate that the webhook was sent from a trusted service, apply the following mechanism.
 
 - Validate the webhook signature, which is present in the `X-Signature` header.
-    - The signature is an HMAC-SHA256 hash (using the `Secret key` as a key) of the request body.
+    - The signature is an HMAC-SHA256 hash (using the `Secret key` as the key) of the request body.
 - Ensure that the `timestamp` field is not older than 1 hour.
 
 ### Status handling and retries
 
-- Expected response status is any 2xx status.
+- The expected response status is any 2xx status.
 - Webhooks do not follow redirects.
-- When 4xx status is encountered, the webhook is considered send and will not be retried.
-- When 5xx status is encountered, the **Service** will perform multiple additional attempts after a reasonable time interval.
-    - The `timestamp` field in payload changes to the time when each attempt was sent.
+- When a 4xx status is encountered, the webhook is considered sent and will not be retried.
+- When a 5xx status is encountered, the **Service** will perform multiple additional attempts after a reasonable time interval.
+    - The `timestamp` field in the payload changes to the time when each attempt was sent.
     - The `triggeredAt` field maintains its original value.
