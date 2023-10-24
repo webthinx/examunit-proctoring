@@ -35,8 +35,8 @@ Access to the functionality of the **Service API** is granted to **Clients** imp
 ```php
 /**
  * @param string                $secretKey Your secret key
- * @param array<string, scalar> $data      All other request fields in an associative array, including timestamp
- * @return string                          The generated signature, which is appended to the data
+ * @param array<string, scalar> $data      All request fields in an associative array, including timestamp
+ * @return string                          The generated signature
  */
 function createSignature(string $secretKey, array $data) : string
 {
@@ -69,6 +69,20 @@ function getStringValue(string|int|float|bool $value) : string
     // Integers and floats are converted to strings
     return (string) $value;
 }
+
+// Fetch secret key from secure storage - such as environment, database, ...
+$secretKey = 'dummyValue';
+
+// Example of an requst data
+$request = [
+    'timestamp' => 1698130780.0,
+];
+
+// Append generated signature to the request
+$request['signature'] = \createSignature($secretKey, $request);
+
+// Json encode whole payload
+$signedPayload = \json_encode($request);
 ```
 
 ## Endpoints and Fields
