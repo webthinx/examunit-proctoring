@@ -2,7 +2,6 @@ openapi: 3.0.0
 info:
   title: 'ExamUnit: Proctoring interface'
   description: 'Interface to manage proctoring application. For documentation, issue tracking and release information please visit our Github repository.'
-  #termsOfService: 'TermsOfService TBA'
   contact:
     name: 'Webthinx s.r.o.'
     url: 'https://webthinx.com'
@@ -1017,7 +1016,7 @@ components:
               nullable: false
               deprecated: true
             firstStartTime:
-              description: 'Earliest possible time to start an exam, timestamp in UTC+2'
+              description: 'Earliest possible time to start an exam, timestamp in UTC'
               type: number
               format: float
               nullable: false
@@ -1026,7 +1025,7 @@ components:
               nullable: true
               deprecated: true
             lastStartTime:
-              description: 'Latest possible time to start an exam, timestamp in UTC+2, if null exam runs until midnight'
+              description: 'Latest possible time to start an exam, timestamp in UTC, if null exam runs until midnight'
               type: number
               format: float
               nullable: true
