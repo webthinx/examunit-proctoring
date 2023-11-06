@@ -92,6 +92,12 @@ paths:
           required: false
           schema:
             type: string
+        -
+          name: nonce
+          in: query
+          required: false
+          schema:
+            type: string
       requestBody:
         description: 'Body can be used instead of query parameters'
         required: false
@@ -172,6 +178,12 @@ paths:
           required: false
           schema:
             type: string
+        -
+          name: nonce
+          in: query
+          required: false
+          schema:
+            type: string
       requestBody:
         description: 'Body can be used instead of query parameters'
         required: false
@@ -212,6 +224,12 @@ paths:
             format: float
         -
           name: signature
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: nonce
           in: query
           required: false
           schema:
@@ -298,6 +316,12 @@ paths:
           required: false
           schema:
             type: string
+        -
+          name: nonce
+          in: query
+          required: false
+          schema:
+            type: string
       requestBody:
         description: 'Body can be used instead of query parameters'
         required: false
@@ -330,12 +354,32 @@ paths:
           required: true
           schema:
             type: integer
+        -
+          name: timestamp
+          in: query
+          required: false
+          schema:
+            type: number
+            format: float
+        -
+          name: signature
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: nonce
+          in: query
+          required: false
+          schema:
+            type: string
       requestBody:
-        required: true
+        description: 'Body can be used instead of query parameters'
+        required: false
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CandidateRequest'
+              $ref: '#/components/schemas/SimpleRequest'
       responses:
         '204':
           description: 'Candidate is marked as finished'
@@ -360,12 +404,32 @@ paths:
           required: true
           schema:
             type: integer
+        -
+          name: timestamp
+          in: query
+          required: false
+          schema:
+            type: number
+            format: float
+        -
+          name: signature
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: nonce
+          in: query
+          required: false
+          schema:
+            type: string
       requestBody:
-        required: true
+        description: 'Body can be used instead of query parameters'
+        required: false
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CandidateRequest'
+              $ref: '#/components/schemas/SimpleRequest'
       responses:
         '204':
           description: 'Candidate is marked as finished'
@@ -392,12 +456,32 @@ paths:
           required: true
           schema:
             type: integer
+        -
+          name: timestamp
+          in: query
+          required: false
+          schema:
+            type: number
+            format: float
+        -
+          name: signature
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: nonce
+          in: query
+          required: false
+          schema:
+            type: string
       requestBody:
-        required: true
+        description: 'Body can be used instead of query parameters'
+        required: false
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CandidateRequest'
+              $ref: '#/components/schemas/SimpleRequest'
       responses:
         '204':
           description: 'Candidate is deleted'
@@ -423,12 +507,32 @@ paths:
           required: true
           schema:
             type: integer
+        -
+          name: timestamp
+          in: query
+          required: false
+          schema:
+            type: number
+            format: float
+        -
+          name: signature
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: nonce
+          in: query
+          required: false
+          schema:
+            type: string
       requestBody:
-        required: true
+        description: 'Body can be used instead of query parameters'
+        required: false
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CandidateRequest'
+              $ref: '#/components/schemas/SimpleRequest'
       responses:
         '204':
           description: 'Candidate is deleted'
@@ -488,6 +592,12 @@ paths:
             format: float
         -
           name: signature
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: nonce
           in: query
           required: false
           schema:
@@ -572,6 +682,12 @@ paths:
           required: false
           schema:
             type: string
+        -
+          name: nonce
+          in: query
+          required: false
+          schema:
+            type: string
       requestBody:
         description: 'Body can be used instead of query parameters'
         required: false
@@ -648,6 +764,13 @@ paths:
             format: float
         -
           name: signature
+          in: query
+          required: false
+          deprecated: true
+          schema:
+            type: string
+        -
+          name: nonce
           in: query
           required: false
           deprecated: true
@@ -735,6 +858,12 @@ paths:
             format: float
         -
           name: signature
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: nonce
           in: query
           required: false
           schema:
