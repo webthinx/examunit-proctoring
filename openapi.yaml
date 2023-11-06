@@ -6,7 +6,7 @@ info:
     name: 'Webthinx s.r.o.'
     url: 'https://webthinx.com'
     email: vaclav.pelisek@webthinx.com
-  version: 0.1.1
+  version: '0.2'
 servers:
   -
     url: proctoringapi.examunit.com/openapi/
@@ -1318,6 +1318,10 @@ components:
           description: 'Timestamp - the request is not executed if timestamp is older than 2 hours'
           type: number
           format: float
+          nullable: false
+        nonce:
+          description: 'Nonce - randomly generated string to randomize signatures'
+          type: string
           nullable: false
       type: object
     PutCandidateResponse:
