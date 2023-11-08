@@ -33,6 +33,8 @@ Access to the functionality of the **Service API** is granted to **Clients** imp
 - Ensure that the `timestamp` field is not older than 1 hour. The expected timestamp timezone is UTC+2.
 
 ```php
+<?php declare(strict_types = 1);
+
 /**
  * @param string                $secretKey Your secret key
  * @param array<string, scalar> $data      All request fields in an associative array, including timestamp
