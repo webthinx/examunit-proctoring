@@ -12,7 +12,7 @@ servers:
     url: proctoringapi.examunit.com/openapi/
     description: 'Production environment'
   -
-    url: rpbackend.appthinx.com/openapi/
+    url: proctoring.appthinx.com/openapi/
     description: 'Staging environment'
 paths:
   /candidates:
