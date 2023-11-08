@@ -1315,7 +1315,7 @@ components:
           type: string
           nullable: false
         timestamp:
-          description: 'Timestamp - the request is not executed if timestamp is older than 2 hours'
+          description: 'Timestamp - UTC timestamp in microseconds (multiplied by 1000). The request is not executed if timestamp is older than 2 hours'
           type: number
           format: float
           nullable: false
