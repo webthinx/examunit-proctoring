@@ -30,7 +30,7 @@ Access to the functionality of the **Service API** is granted to **Clients** imp
 - Sign the request and provide the result in the `signature` field.
     - The signature is an HMAC-SHA256 hash (using the `Secret key` as the key) of the string built with all the request parameters in the format `name=value`, joined by `?`, and ordered alphabetically by name.
     - An example of code generating the signature can be found below.
-- Ensure that the `timestamp` field is not older than 1 hour. The expected timestamp timezone is UTC+2.
+- Ensure that the `timestamp` field is not older than 1 hour. The expected timestamp timezone is UTC.
 
 ```php
 <?php declare(strict_types = 1);
