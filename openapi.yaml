@@ -6,7 +6,7 @@ info:
     name: 'Webthinx s.r.o.'
     url: 'https://webthinx.com'
     email: vaclav.pelisek@webthinx.com
-  version: '0.2'
+  version: '1.0'
 servers:
   -
     url: proctoringapi.examunit.com/openapi/
@@ -1041,6 +1041,7 @@ components:
               type: string
               format: uri
               nullable: true
+          type: object
     ExamDocumentPayload:
       properties:
         Id:
@@ -1064,6 +1065,7 @@ components:
             content:
               description: 'Content of infoForCandidates field'
               type: string
+          type: object
     ExamPayload:
       properties:
         Id:
@@ -1275,6 +1277,7 @@ components:
               description: 'Comma separated list of allowed items'
               type: string
               nullable: true
+          type: object
     GetCandidateResponse:
       properties:
         Student:
@@ -1315,7 +1318,7 @@ components:
           type: string
           nullable: false
         timestamp:
-          description: 'Timestamp - UTC timestamp in microseconds (multiplied by 1000). The request is not executed if timestamp is older than 2 hours'
+          description: 'Timestamp - UTC timestamp in microseconds (multiplied by 1000)'
           type: number
           format: float
           nullable: false
