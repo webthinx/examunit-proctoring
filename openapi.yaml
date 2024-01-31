@@ -830,6 +830,37 @@ paths:
         '422':
           description: 'Unprocessable entity: invalid input or signature'
       deprecated: true
+  '/exams/{id}/delete_student':
+    delete:
+      tags:
+        - Exam
+      summary: 'Use DELETE:Candidates'
+      operationId: 79c84480df143eedf9fb2cc33b1635c3
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExamDeleteCandidateRequest'
+      responses:
+        '204':
+          description: 'Candidate is deleted'
+        '401':
+          description: 'Unauthorized: invalid or missing token'
+        '403':
+          description: 'Forbidden: insufficient permissions to resource'
+        '404':
+          description: 'Not found: resource not found'
+        '422':
+          description: 'Unprocessable entity: invalid input or signature'
+      deprecated: true
   '/exams/{id}/show_student':
     get:
       tags:
@@ -1041,6 +1072,17 @@ components:
               type: string
               format: uri
               nullable: true
+          type: object
+    ExamDeleteCandidateRequest:
+      type: object
+      allOf:
+        -
+          $ref: '#/components/schemas/SimpleRequest'
+        -
+          properties:
+            candidateId:
+              description: CandidateId
+              type: integer
           type: object
     ExamDocumentPayload:
       properties:
