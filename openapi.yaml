@@ -6,7 +6,7 @@ info:
     name: 'Webthinx s.r.o.'
     url: 'https://webthinx.com'
     email: vaclav.pelisek@webthinx.com
-  version: '1.0'
+  version: '1.1'
 servers:
   -
     url: proctoringapi.examunit.com/openapi/
@@ -929,6 +929,9 @@ components:
         Id:
           description: ID
           type: integer
+        Identifier:
+          description: 'Internal identifier of a candidate'
+          type: string
         Name:
           description: 'Full name'
           type: string
@@ -1013,8 +1016,16 @@ components:
             - APPROVED
             - STARTED
             - FINISHED
-            - DISMISSED
             - CLOSED
+        SessionResult:
+          description: 'Result of the session, available as soon as the session is CLOSED'
+          type: string
+          enum:
+            - SUCCESS
+            - DISMISS
+            - NOT_ATTENDED
+            - NOT_STARTED
+          nullable: true
         Status:
           description: 'Status of the session, with "exam_started" instead of "STARTED" for compatibility reasons.'
           type: string
@@ -1113,9 +1124,13 @@ components:
         Id:
           description: ID
           type: integer
+        Identifier:
+          description: 'Internal identifier of an exam'
+          type: string
         InstituteId:
           description: 'ID of institute'
           type: integer
+          deprecated: true
         Name:
           description: Name
           type: string
