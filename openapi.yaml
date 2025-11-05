@@ -6,14 +6,14 @@ info:
     name: 'Webthinx s.r.o.'
     url: 'https://webthinx.com'
     email: vaclav.pelisek@webthinx.com
-  version: '1.1'
+  version: '1.2'
 servers:
   -
-    url: proctoringapi.examunit.com/openapi/
+    url: 'https://api.proctoring.examunit.com/openapi/'
     description: 'Production environment'
   -
-    url: proctoring.appthinx.com/openapi/
-    description: 'Staging environment'
+    url: 'https://proctoringapi.examunit.com/openapi/'
+    description: 'Production environment, old URL'
 paths:
   /candidates:
     post:
@@ -383,6 +383,8 @@ paths:
       responses:
         '204':
           description: 'Candidate is marked as finished'
+        '400':
+          description: 'BadRequest: invalid state of referenced resources'
         '401':
           description: 'Unauthorized: invalid or missing token'
         '403':
@@ -433,6 +435,8 @@ paths:
       responses:
         '204':
           description: 'Candidate is marked as finished'
+        '400':
+          description: 'BadRequest: invalid state of referenced resources'
         '401':
           description: 'Unauthorized: invalid or missing token'
         '403':
@@ -1226,6 +1230,16 @@ components:
               description: 'Whether to require secondary cam'
               type: boolean
               nullable: false
+            screenshare:
+              description: 'Whether to require screenshare'
+              type: boolean
+              default: true
+              nullable: false
+            safeExamBrowser:
+              description: 'Whether to require SafeExamBrowser'
+              type: boolean
+              default: false
+              nullable: false
             save_personaldata:
               description: 'Use savePersonalData'
               type: boolean
@@ -1402,6 +1416,16 @@ components:
 security:
   -
     DefaultAuthorization: []
+tags:
+  -
+    name: Candidate
+    description: Candidate
+  -
+    name: Student
+    description: Student
+  -
+    name: Exam
+    description: Exam
 externalDocs:
   description: 'Issue tracker and release log on Github'
   url: 'https://github.com/webthinx/examunit-proctoring'
